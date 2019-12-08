@@ -3,27 +3,39 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A208BEACA2F064514BAD6FB /* Pods_DATC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A34AF1759A8AC5B418219324 /* Pods_DATC.framework */; };
+		A73067D223925B5F001AF822 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A73067D123925B5F001AF822 /* GoogleService-Info.plist */; };
+		A73067D42392B037001AF822 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73067D32392B037001AF822 /* FirebaseAuthManager.swift */; };
 		A78AB4D9237B04C40073C098 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB4D8237B04C40073C098 /* AppDelegate.swift */; };
 		A78AB4DB237B04C40073C098 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB4DA237B04C40073C098 /* SceneDelegate.swift */; };
-		A78AB4DD237B04C40073C098 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB4DC237B04C40073C098 /* ViewController.swift */; };
+		A78AB4DD237B04C40073C098 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB4DC237B04C40073C098 /* MapViewController.swift */; };
 		A78AB4E0237B04C40073C098 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A78AB4DE237B04C40073C098 /* Main.storyboard */; };
 		A78AB4E2237B04C60073C098 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A78AB4E1237B04C60073C098 /* Assets.xcassets */; };
 		A78AB4E5237B04C60073C098 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A78AB4E3237B04C60073C098 /* LaunchScreen.storyboard */; };
+		A78AB4EF237D4A470073C098 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB4EE237D4A470073C098 /* LocationSearchTable.swift */; };
+		A78AB4F1237D54010073C098 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB4F0237D54010073C098 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		77CA5AEDEEA2EB1B9AFF5DE9 /* Pods-DATC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DATC.release.xcconfig"; path = "Target Support Files/Pods-DATC/Pods-DATC.release.xcconfig"; sourceTree = "<group>"; };
+		84E299A4AC2DCB42E000424A /* Pods-DATC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DATC.debug.xcconfig"; path = "Target Support Files/Pods-DATC/Pods-DATC.debug.xcconfig"; sourceTree = "<group>"; };
+		A34AF1759A8AC5B418219324 /* Pods_DATC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DATC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A73067D123925B5F001AF822 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A73067D32392B037001AF822 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		A78AB4D5237B04C40073C098 /* DATC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DATC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A78AB4D8237B04C40073C098 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A78AB4DA237B04C40073C098 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A78AB4DC237B04C40073C098 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A78AB4DC237B04C40073C098 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		A78AB4DF237B04C40073C098 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A78AB4E1237B04C60073C098 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A78AB4E4237B04C60073C098 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A78AB4E6237B04C60073C098 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A78AB4EE237D4A470073C098 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
+		A78AB4F0237D54010073C098 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +43,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A208BEACA2F064514BAD6FB /* Pods_DATC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16A914FD34DC25B8C1193E98 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				84E299A4AC2DCB42E000424A /* Pods-DATC.debug.xcconfig */,
+				77CA5AEDEEA2EB1B9AFF5DE9 /* Pods-DATC.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		A78AB4CC237B04C40073C098 = {
 			isa = PBXGroup;
 			children = (
 				A78AB4D7237B04C40073C098 /* DATC */,
 				A78AB4D6237B04C40073C098 /* Products */,
+				16A914FD34DC25B8C1193E98 /* Pods */,
+				AC40313B337DA6CEA59EF491 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,13 +82,25 @@
 			children = (
 				A78AB4D8237B04C40073C098 /* AppDelegate.swift */,
 				A78AB4DA237B04C40073C098 /* SceneDelegate.swift */,
-				A78AB4DC237B04C40073C098 /* ViewController.swift */,
+				A78AB4DC237B04C40073C098 /* MapViewController.swift */,
+				A78AB4F0237D54010073C098 /* MainViewController.swift */,
 				A78AB4DE237B04C40073C098 /* Main.storyboard */,
+				A78AB4EE237D4A470073C098 /* LocationSearchTable.swift */,
 				A78AB4E1237B04C60073C098 /* Assets.xcassets */,
 				A78AB4E3237B04C60073C098 /* LaunchScreen.storyboard */,
 				A78AB4E6237B04C60073C098 /* Info.plist */,
+				A73067D123925B5F001AF822 /* GoogleService-Info.plist */,
+				A73067D32392B037001AF822 /* FirebaseAuthManager.swift */,
 			);
 			path = DATC;
+			sourceTree = "<group>";
+		};
+		AC40313B337DA6CEA59EF491 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A34AF1759A8AC5B418219324 /* Pods_DATC.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +110,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A78AB4E9237B04C60073C098 /* Build configuration list for PBXNativeTarget "DATC" */;
 			buildPhases = (
+				B9287794A57038C38E502853 /* [CP] Check Pods Manifest.lock */,
 				A78AB4D1237B04C40073C098 /* Sources */,
 				A78AB4D2237B04C40073C098 /* Frameworks */,
 				A78AB4D3237B04C40073C098 /* Resources */,
+				9D20AA0124C0B3981DE18EF4 /* [CP] Embed Pods Frameworks */,
+				41D1D074C8BCCAB771AFC584 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -125,6 +164,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A73067D223925B5F001AF822 /* GoogleService-Info.plist in Resources */,
 				A78AB4E5237B04C60073C098 /* LaunchScreen.storyboard in Resources */,
 				A78AB4E2237B04C60073C098 /* Assets.xcassets in Resources */,
 				A78AB4E0237B04C40073C098 /* Main.storyboard in Resources */,
@@ -133,13 +173,75 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		41D1D074C8BCCAB771AFC584 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DATC/Pods-DATC-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DATC/Pods-DATC-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DATC/Pods-DATC-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9D20AA0124C0B3981DE18EF4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DATC/Pods-DATC-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DATC/Pods-DATC-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DATC/Pods-DATC-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B9287794A57038C38E502853 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DATC-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A78AB4D1237B04C40073C098 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A78AB4DD237B04C40073C098 /* ViewController.swift in Sources */,
+				A73067D42392B037001AF822 /* FirebaseAuthManager.swift in Sources */,
+				A78AB4DD237B04C40073C098 /* MapViewController.swift in Sources */,
+				A78AB4EF237D4A470073C098 /* LocationSearchTable.swift in Sources */,
 				A78AB4D9237B04C40073C098 /* AppDelegate.swift in Sources */,
+				A78AB4F1237D54010073C098 /* MainViewController.swift in Sources */,
 				A78AB4DB237B04C40073C098 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,6 +384,7 @@
 		};
 		A78AB4EA237B04C60073C098 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84E299A4AC2DCB42E000424A /* Pods-DATC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +403,7 @@
 		};
 		A78AB4EB237B04C60073C098 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 77CA5AEDEEA2EB1B9AFF5DE9 /* Pods-DATC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
