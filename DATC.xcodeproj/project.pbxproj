@@ -12,12 +12,12 @@
 		A73067D42392B037001AF822 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73067D32392B037001AF822 /* FirebaseAuthManager.swift */; };
 		A78AB4D9237B04C40073C098 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB4D8237B04C40073C098 /* AppDelegate.swift */; };
 		A78AB4DB237B04C40073C098 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB4DA237B04C40073C098 /* SceneDelegate.swift */; };
-		A78AB4DD237B04C40073C098 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB4DC237B04C40073C098 /* MapViewController.swift */; };
 		A78AB4E0237B04C40073C098 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A78AB4DE237B04C40073C098 /* Main.storyboard */; };
 		A78AB4E2237B04C60073C098 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A78AB4E1237B04C60073C098 /* Assets.xcassets */; };
 		A78AB4E5237B04C60073C098 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A78AB4E3237B04C60073C098 /* LaunchScreen.storyboard */; };
-		A78AB4EF237D4A470073C098 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB4EE237D4A470073C098 /* LocationSearchTable.swift */; };
-		A78AB4F1237D54010073C098 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB4F0237D54010073C098 /* MainViewController.swift */; };
+		A7FF84D223BA7EF500139F44 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FF84CF23BA7EF500139F44 /* MapViewController.swift */; };
+		A7FF84D323BA7EF500139F44 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FF84D023BA7EF500139F44 /* LocationSearchTable.swift */; };
+		A7FF84D423BA7EF600139F44 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FF84D123BA7EF500139F44 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,13 +29,13 @@
 		A78AB4D5237B04C40073C098 /* DATC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DATC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A78AB4D8237B04C40073C098 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A78AB4DA237B04C40073C098 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A78AB4DC237B04C40073C098 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		A78AB4DF237B04C40073C098 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A78AB4E1237B04C60073C098 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A78AB4E4237B04C60073C098 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A78AB4E6237B04C60073C098 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A78AB4EE237D4A470073C098 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
-		A78AB4F0237D54010073C098 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A7FF84CF23BA7EF500139F44 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		A7FF84D023BA7EF500139F44 /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
+		A7FF84D123BA7EF500139F44 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,17 +82,49 @@
 			children = (
 				A78AB4D8237B04C40073C098 /* AppDelegate.swift */,
 				A78AB4DA237B04C40073C098 /* SceneDelegate.swift */,
-				A78AB4DC237B04C40073C098 /* MapViewController.swift */,
-				A78AB4F0237D54010073C098 /* MainViewController.swift */,
-				A78AB4DE237B04C40073C098 /* Main.storyboard */,
-				A78AB4EE237D4A470073C098 /* LocationSearchTable.swift */,
+				A7FF84CD23BA7E9500139F44 /* Models */,
+				A7FF84D523BA7F2200139F44 /* Views */,
+				A7FF84CE23BA7EE100139F44 /* Controllers */,
+				A7FF84D623BA7F3000139F44 /* Business Logic */,
 				A78AB4E1237B04C60073C098 /* Assets.xcassets */,
-				A78AB4E3237B04C60073C098 /* LaunchScreen.storyboard */,
 				A78AB4E6237B04C60073C098 /* Info.plist */,
 				A73067D123925B5F001AF822 /* GoogleService-Info.plist */,
-				A73067D32392B037001AF822 /* FirebaseAuthManager.swift */,
 			);
 			path = DATC;
+			sourceTree = "<group>";
+		};
+		A7FF84CD23BA7E9500139F44 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A7FF84CE23BA7EE100139F44 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A7FF84D023BA7EF500139F44 /* LocationSearchTable.swift */,
+				A7FF84D123BA7EF500139F44 /* MainViewController.swift */,
+				A7FF84CF23BA7EF500139F44 /* MapViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A7FF84D523BA7F2200139F44 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A78AB4E3237B04C60073C098 /* LaunchScreen.storyboard */,
+				A78AB4DE237B04C40073C098 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A7FF84D623BA7F3000139F44 /* Business Logic */ = {
+			isa = PBXGroup;
+			children = (
+				A73067D32392B037001AF822 /* FirebaseAuthManager.swift */,
+			);
+			path = "Business Logic";
 			sourceTree = "<group>";
 		};
 		AC40313B337DA6CEA59EF491 /* Frameworks */ = {
@@ -238,11 +270,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A73067D42392B037001AF822 /* FirebaseAuthManager.swift in Sources */,
-				A78AB4DD237B04C40073C098 /* MapViewController.swift in Sources */,
-				A78AB4EF237D4A470073C098 /* LocationSearchTable.swift in Sources */,
+				A7FF84D323BA7EF500139F44 /* LocationSearchTable.swift in Sources */,
 				A78AB4D9237B04C40073C098 /* AppDelegate.swift in Sources */,
-				A78AB4F1237D54010073C098 /* MainViewController.swift in Sources */,
+				A7FF84D423BA7EF600139F44 /* MainViewController.swift in Sources */,
 				A78AB4DB237B04C40073C098 /* SceneDelegate.swift in Sources */,
+				A7FF84D223BA7EF500139F44 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
