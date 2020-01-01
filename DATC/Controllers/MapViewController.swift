@@ -15,7 +15,8 @@ protocol HandleMapSearch {
     func dropPinZoomIn(placemark: MKPlacemark)
 }
 
-class MapViewController: UIViewController, UISearchBarDelegate {
+class MapViewController: UIViewController, UISearchBarDelegate , ReportModelProtocol {
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -23,6 +24,8 @@ class MapViewController: UIViewController, UISearchBarDelegate {
     var resultSearchController: UISearchController? = nil
     var selectedPin: MKPlacemark? = nil
     
+    var feedItems: NSArray = NSArray()
+    var selectedReport : Report = Report()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +65,11 @@ class MapViewController: UIViewController, UISearchBarDelegate {
         
         locationSearchTable.mapView = mapView
         locationSearchTable.handleMapSearchDelegate = self
+        
+        //MARK: Download data from mySQL
+        let reportModel = ReportModel()
+        reportModel.delegate = self
+        reportModel.downloadItems()
     }
     
     //MARK: - Directions
@@ -72,13 +80,37 @@ class MapViewController: UIViewController, UISearchBarDelegate {
             mapItem.openInMaps(launchOptions: launchOptions)
         }
     }
+    
+    func itemsDownloaded(items: NSArray) {
+        feedItems = items
+        var i = 0
+        let report = Report()
+        
+        for i in 0 ..< feedItems.count {
+            let report: Report = feedItems[i] as! Report
+            print(report.descriptionReport)
+        }
+    }
    
 }
 
 // MARK: - CLLocationManagerDelegate
 
 extension MapViewController: CLLocationManagerDelegate {
+    //MARK: - The function wich added multiple reports(annotation) on map
+//    func createAnnotatin(locations: [[String: Any]]) {
+//        for location in locations {
+//            let annotation = MKPointAnnotation()
+//            for location in locations {
+//                annotation.title = location["title"] as? String
+//                annotation.coordinate = CLLocationCoordinate2D(latitude: location["latitude"] as? CLLocationDegrees ?? , longitude: (location["longitude"] as? CLLocationDegrees)!)
+//
+//                mapView.addAnnotation(annotation)
+//            }
+//        }
+//    }
     
+    //MARK: - Create the user pin with user locatin
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let userLocation = locations[0] as CLLocation
@@ -89,6 +121,10 @@ extension MapViewController: CLLocationManagerDelegate {
         
         print("user latitude = \(userLocation.coordinate.latitude)")
         print("user longitude = \(userLocation.coordinate.longitude)")
+        
+        for i in 0 ..< feedItems.count {
+                 print(feedItems[i])
+             }
         
         // print("Long: \(locations[0].coordinate.latitude) and Lat: \(locations[0].coordinate.longitude)")
     }

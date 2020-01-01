@@ -167,7 +167,7 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vulpe" translatesAutoresizingMaskIntoConstraints="NO" id="dcQ-cT-usI">
-                                <rect key="frame" x="269.5" y="451" width="124.5" height="76.000000000000227"/>
+                                <rect key="frame" x="269.5" y="451" width="124.5" height="76"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.25592699804006441" green="0.28094491095874363" blue="0.29297550647987602" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
