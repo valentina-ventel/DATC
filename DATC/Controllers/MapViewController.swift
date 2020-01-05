@@ -18,30 +18,37 @@ protocol HandleMapSearch {
 
 class MapViewController: UIViewController, UISearchBarDelegate {
     
-    @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet fileprivate weak var mapView: MKMapView!
+    @IBOutlet fileprivate weak var searchBar: UISearchBar!
     
-    let locationManager = CLLocationManager()
-    var resultSearchController: UISearchController? = nil
-    var selectedPin: MKPlacemark? = nil
-    let reportModel = ReportModel()
-    var animalTextField: UITextField?
-    var latitudeTextField: UITextField?
-    var longitudeTextField: UITextField?
-    var dateTextField: UITextField?
-    var coordinateTap: CLLocationCoordinate2D?
+    fileprivate let locationManager = CLLocationManager()
+    fileprivate var resultSearchController: UISearchController? = nil
+    fileprivate var selectedPin: MKPlacemark? = nil
+    fileprivate let reportModel = ReportModel()
+    fileprivate var animalTextField: UITextField?
+    fileprivate var latitudeTextField: UITextField?
+    fileprivate var longitudeTextField: UITextField?
+    fileprivate var dateTextField: UITextField?
+    fileprivate var coordinateTap: CLLocationCoordinate2D?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // hide navigationItem button
-        self.navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.setHidesBackButton(true, animated: false)
+        definesPresentationContext = true
             
+        configureLocationManager()
+        configureSearch()
+    }
+    
+    // MARK: Private
+    fileprivate func configureLocationManager() {
         if CLLocationManager.locationServicesEnabled() == true {
             
             if CLLocationManager.authorizationStatus() == .restricted ||
-               CLLocationManager.authorizationStatus() == .denied ||
-               CLLocationManager.authorizationStatus() == .notDetermined
+                CLLocationManager.authorizationStatus() == .denied ||
+                CLLocationManager.authorizationStatus() == .notDetermined
             {
                 locationManager.requestWhenInUseAuthorization()
             }
@@ -52,12 +59,14 @@ class MapViewController: UIViewController, UISearchBarDelegate {
         } else {
             print("Please turn ON location services or GPS")
         }
+    }
+    
+    fileprivate func configureSearch() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let locationSearchTVC = storyboard.instantiateViewController(identifier: "locationTable") as! LocationSearchTable
+        resultSearchController = UISearchController(searchResultsController: locationSearchTVC)
         
-        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "locationTable") as! LocationSearchTable
-        
-        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
-        
-        resultSearchController!.searchResultsUpdater = locationSearchTable
+        resultSearchController!.searchResultsUpdater = locationSearchTVC
         
         let searchBar = resultSearchController!.searchBar
         searchBar.sizeToFit()
@@ -65,10 +74,8 @@ class MapViewController: UIViewController, UISearchBarDelegate {
         navigationItem.titleView = resultSearchController?.searchBar
         resultSearchController?.hidesNavigationBarDuringPresentation = false
         
-        definesPresentationContext = true
-        
-        locationSearchTable.mapView = mapView
-        locationSearchTable.handleMapSearchDelegate = self
+        locationSearchTVC.mapView = mapView
+        locationSearchTVC.handleMapSearchDelegate = self
     }
     
     //MARK: - Directions
@@ -80,17 +87,19 @@ class MapViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
-   //MARK: - add report by tap on map
-    @IBAction func longPressGestureRecognize(_ sender: UILongPressGestureRecognizer) {
+   //MARK: - Gestures
+    @IBAction fileprivate func longPressGestureRecognize(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .ended {
             let locationInView = sender.location(in: mapView)
             let tappedCoordinate = mapView.convert(locationInView, toCoordinateFrom: mapView)
             coordinateTap = tappedCoordinate
           
-            let alertController = UIAlertController(title: "Description", message: nil, preferredStyle: .alert)
-            alertController.addTextField(configurationHandler: animalTextField)
+            let alertController = UIAlertController(title: "Name", message: nil, preferredStyle: .alert)
+            alertController.addTextField(configurationHandler: {textField in
+                textField.placeholder = "Bear/Fox/Wolf etc"
+            })
             
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: self.okHandler)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: self.okHandler)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             alertController.addAction(okAction)
             alertController.addAction(cancelAction)
@@ -98,51 +107,61 @@ class MapViewController: UIViewController, UISearchBarDelegate {
             self.present(alertController, animated: true)
         }
     }
-   
-    func animalTextField(textField: UITextField!) {
-        animalTextField = textField
-        animalTextField?.placeholder = "Bear/Fox/Wolf/etc"
-    }
     
-    func okHandler(alert: UIAlertAction!) {
+    fileprivate func okHandler(alert: UIAlertAction!) {
+        guard let animalTextField = animalTextField,
+            let animalName = animalTextField.text else {
+                print("Invalid animal name")
+                return
+        }
+        
+        guard let coordinate = coordinateTap else {
+            print("Invalid tap coordinate")
+            return
+        }
+            
         let annotation = MKPointAnnotation()
-        annotation.title = animalTextField?.text
-        annotation.coordinate = coordinateTap!
-        print("-----------TextField = \(animalTextField?.text)")
+        annotation.title = animalName
+        annotation.coordinate = coordinate
         mapView.addAnnotation(annotation)
         
-        var httpInsert = HTTPReport()
-        httpInsert.insertReport(report: Report(descriptionReport: animalTextField!.text!, latitude: Float(coordinateTap!.latitude), longitude: Float(coordinateTap!.longitude)))
+        let animalReport = AnimalReport(name: animalName,
+                                        latitude: coordinate.latitude,
+                                        longitude: coordinate.longitude)
+        API.addAnimalReport(report: animalReport)
+    }
+}
+
+// MARK: - ReportModelProtocol
+
+extension MapViewController: ReportModelProtocol  {
+    func itemsDownloaded(items: [AnimalReport]) {
+        for report in items {
+            print(report.name)
+        }
+        createAnnotation(reports: items)
     }
 }
 
 // MARK: - CLLocationManagerDelegate
 
-extension MapViewController: CLLocationManagerDelegate, ReportModelProtocol  {
-    
-    //MARK: - The function wich added the animals reported on map
-    func createAnnotatin(reports: [Report]) {
+extension MapViewController: CLLocationManagerDelegate {
+    // Function which adds the animal reported on map
+    func createAnnotation(reports: [AnimalReport]) {
         
         for report in reports {
             let annotation = MKPointAnnotation()
             annotation.title = report.name
-            annotation.coordinate = CLLocationCoordinate2D(latitude: Double(report.latitude) as CLLocationDegrees, longitude:
-                Double(report.longitude) as CLLocationDegrees)
+            annotation.coordinate = CLLocationCoordinate2D(latitude: report.latitude,
+                                                           longitude: report.longitude)
             print("________________________")
             print("Double annotation: \(Double(report.latitude)) and \(Double(report.longitude))")
             print("________________________")
             mapView.addAnnotation(annotation)
         }
     }
-
-    func itemsDownloaded(items: [Report]) {
-        for report in items {
-            print(report.name)
-        }
-        createAnnotatin(reports: items)
-    }
     
-    //MARK: - Create the user pin with user locatin
+    // Create the user pin with user location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let userLocation = locations[0] as CLLocation
@@ -156,8 +175,7 @@ extension MapViewController: CLLocationManagerDelegate, ReportModelProtocol  {
         
         print("Long: \(region.span.latitudeDelta) and Lat: \(region.span.longitudeDelta)")
         
-        //MARK: - Calulating the coordinates user of the region
-        // and prepare for selection of animals from database
+        // user region coordinates
         let regionReports = Region(nw: region.nw(),
                                    se: region.se())
         reportModel.delegate = self

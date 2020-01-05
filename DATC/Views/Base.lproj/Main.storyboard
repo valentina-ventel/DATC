@@ -52,7 +52,7 @@
         <!--Location Search Table-->
         <scene sceneID="frf-ag-d2v">
             <objects>
-                <tableViewController storyboardIdentifier="locationTable" id="gB3-i7-6j9" customClass="LocationSearchTable" customModule="DATC" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="locationTable" id="gB3-i7-6j9" customClass="LocationSearchTable" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="pNp-It-thA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

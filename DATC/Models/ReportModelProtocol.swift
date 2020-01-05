@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 protocol ReportModelProtocol: class {
-    func itemsDownloaded(items: [Report])
+    func itemsDownloaded(items: [AnimalReport])
 }
 
 class ReportModel: NSObject {
@@ -81,27 +81,29 @@ class ReportModel: NSObject {
         }
         
         var jsonElement = NSDictionary()
-        var reports = [Report]()
+        var reports = [AnimalReport]()
         
         for i in 0 ..< jsonResult.count
         {
             
             jsonElement = jsonResult[i] as! NSDictionary
             var descriptionReport: String
-            var latitude: Float
-            var longitude: Float
+            var latitude: Double
+            var longitude: Double
             
             //the following insures none of the JsonElement values are nil through optional binding
             if let description = jsonElement["description"] as? String,
                 let latitudeString = jsonElement["latitude"] as? String,
-                let lat = Float(latitudeString),
+                let lat = Double(latitudeString),
                 let longitudeString = jsonElement["longitude"] as? String,
-                let lon = Float(longitudeString)
+                let lon = Double(longitudeString)
             {
                 descriptionReport = description
                 latitude = lat
                 longitude = lon
-                reports.append(Report(descriptionReport: descriptionReport, latitude: latitude, longitude: longitude))
+                reports.append(AnimalReport(name: descriptionReport,
+                                            latitude: latitude,
+                                            longitude: longitude))
             }
         }
         

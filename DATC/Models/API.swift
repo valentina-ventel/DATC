@@ -10,10 +10,13 @@ import UIKit
 import Foundation
 
 
-class HTTPReport: NSObject {
-    func insertReport(report: Report) {
-        let urlPath = "http://127.0.0.1/insertReports.php"
-        
+class API: NSObject {
+    static let rootEndpoint = "http://127.0.0.1"
+    static let getAnimalReports = ""
+    static let addAnimalReport = "insertReports.php"
+    
+    class func addAnimalReport(report: AnimalReport) {
+        let urlPath = rootEndpoint + "/" + addAnimalReport
         guard let url = URL(string: urlPath) else {
             print("Invalid URL", urlPath)
             return
@@ -25,25 +28,21 @@ class HTTPReport: NSObject {
         request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
         
         let postString = "item1=\(report.name)&item2=\(report.latitude)&item3=\(report.longitude)"
-        print("Add: \(postString)")
+        print("Adding animal report: \(postString)")
         request.httpBody = postString.data(using: String.Encoding.utf8)
-
         
         let task = session.dataTask(with: request ) {data, response, error in
             
-                guard let _:NSData = data as NSData?, let _:URLResponse = response, error == nil else {
-                    print("error")
-                    return
-                }
-                
-                let dataString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                print("--------insert----------")
-                print(dataString)
-                print("------------------------")
+            guard let myData = data as Data?, let _:URLResponse = response, error == nil else {
+                print("Error while adding animal report: \(error.debugDescription)")
+                return
+            }
+            
+            guard let dataString = NSString(data: myData,
+                                            encoding: String.Encoding.utf8.rawValue) else { return }
+            print(dataString)
         }
         
-        
         task.resume()
-        
     }
 }

@@ -8,13 +8,13 @@
 
 import UIKit
 
-class Report: NSObject {
+class AnimalReport: NSObject {
     var name: String
-    var latitude: Float
-    var longitude: Float
+    var latitude: Double
+    var longitude: Double
     
-    init(descriptionReport: String, latitude: Float, longitude: Float) {
-        self.name = descriptionReport
+    init(name: String, latitude: Double, longitude: Double) {
+        self.name = name
         self.latitude = latitude
         self.longitude = longitude
     }
