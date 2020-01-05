@@ -15,7 +15,7 @@ protocol HandleMapSearch {
     func dropPinZoomIn(placemark: MKPlacemark)
 }
 
-class MapViewController: UIViewController, UISearchBarDelegate , ReportModelProtocol {
+class MapViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -23,9 +23,12 @@ class MapViewController: UIViewController, UISearchBarDelegate , ReportModelProt
     let locationManager = CLLocationManager()
     var resultSearchController: UISearchController? = nil
     var selectedPin: MKPlacemark? = nil
-    
-    var feedItems: NSArray = NSArray()
-    var selectedReport : Report = Report()
+    let reportModel = ReportModel()
+    var animalTextField: UITextField?
+    var latitudeTextField: UITextField?
+    var longitudeTextField: UITextField?
+    var dateTextField: UITextField?
+    var coordinateTap: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,11 +68,6 @@ class MapViewController: UIViewController, UISearchBarDelegate , ReportModelProt
         
         locationSearchTable.mapView = mapView
         locationSearchTable.handleMapSearchDelegate = self
-        
-        //MARK: Download data from mySQL
-        let reportModel = ReportModel()
-        reportModel.delegate = self
-        reportModel.downloadItems()
     }
     
     //MARK: - Directions
@@ -81,34 +79,67 @@ class MapViewController: UIViewController, UISearchBarDelegate , ReportModelProt
         }
     }
     
-    func itemsDownloaded(items: NSArray) {
-        feedItems = items
-        var i = 0
-        let report = Report()
-        
-        for i in 0 ..< feedItems.count {
-            let report: Report = feedItems[i] as! Report
-            print(report.descriptionReport)
+   //MARK: - add report by tap on map
+    @IBAction func longPressGestureRecognize(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .ended {
+            let locationInView = sender.location(in: mapView)
+            let tappedCoordinate = mapView.convert(locationInView, toCoordinateFrom: mapView)
+            coordinateTap = tappedCoordinate
+          
+            let alertController = UIAlertController(title: "Description", message: nil, preferredStyle: .alert)
+            alertController.addTextField(configurationHandler: animalTextField)
+            
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: self.okHandler)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true)
         }
     }
    
+    func animalTextField(textField: UITextField!) {
+        animalTextField = textField
+        animalTextField?.placeholder = "Bear/Fox/Wolf/etc"
+    }
+    
+    func okHandler(alert: UIAlertAction!) {
+        let annotation = MKPointAnnotation()
+        annotation.title = animalTextField?.text
+        annotation.coordinate = coordinateTap!
+        print("-----------TextField = \(animalTextField?.text)")
+        mapView.addAnnotation(annotation)
+        
+        var httpInsert = HTTPReport()
+        httpInsert.insertReport(report: Report(descriptionReport: animalTextField!.text!, latitude: Float(coordinateTap!.latitude), longitude: Float(coordinateTap!.longitude)))
+    }
 }
 
 // MARK: - CLLocationManagerDelegate
 
-extension MapViewController: CLLocationManagerDelegate {
-    //MARK: - The function wich added multiple reports(annotation) on map
-//    func createAnnotatin(locations: [[String: Any]]) {
-//        for location in locations {
-//            let annotation = MKPointAnnotation()
-//            for location in locations {
-//                annotation.title = location["title"] as? String
-//                annotation.coordinate = CLLocationCoordinate2D(latitude: location["latitude"] as? CLLocationDegrees ?? , longitude: (location["longitude"] as? CLLocationDegrees)!)
-//
-//                mapView.addAnnotation(annotation)
-//            }
-//        }
-//    }
+extension MapViewController: CLLocationManagerDelegate, ReportModelProtocol  {
+    
+    //MARK: - The function wich added the animals reported on map
+    func createAnnotatin(reports: [Report]) {
+        
+        for report in reports {
+            let annotation = MKPointAnnotation()
+            annotation.title = report.descriptionReport
+            annotation.coordinate = CLLocationCoordinate2D(latitude: Double(report.latitude) as CLLocationDegrees, longitude:
+                Double(report.longitude) as CLLocationDegrees)
+            print("________________________")
+            print("Double annotation: \(Double(report.latitude)) and \(Double(report.longitude))")
+            print("________________________")
+            mapView.addAnnotation(annotation)
+        }
+    }
+
+    func itemsDownloaded(items: [Report]) {
+        for report in items {
+            print(report.descriptionReport)
+        }
+        createAnnotatin(reports: items)
+    }
     
     //MARK: - Create the user pin with user locatin
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -122,11 +153,12 @@ extension MapViewController: CLLocationManagerDelegate {
         print("user latitude = \(userLocation.coordinate.latitude)")
         print("user longitude = \(userLocation.coordinate.longitude)")
         
-        for i in 0 ..< feedItems.count {
-                 print(feedItems[i])
-             }
+        print("Long: \(region.span.latitudeDelta) and Lat: \(region.span.longitudeDelta)")
         
-        // print("Long: \(locations[0].coordinate.latitude) and Lat: \(locations[0].coordinate.longitude)")
+        //MARK: - Calulating the coordinates user of the region and prepare for selecton of animals from database
+        let regionReports = Region(minLatitude: Float(region.center.latitude - region.span.latitudeDelta), maxLatitude: Float(region.center.latitude + region.span.latitudeDelta), minLongitude: Float(region.center.longitude - region.span.longitudeDelta), maxLongitude: Float(region.center.longitude + region.span.longitudeDelta))
+        reportModel.delegate = self
+        reportModel.downloadItems(regionReports: regionReports)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -150,7 +182,7 @@ extension UIViewController: MKMapViewDelegate {
         let reuseId = "pin"
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-        pinView?.pinTintColor = UIColor.orange
+        pinView?.pinTintColor = UIColor.black
         pinView?.canShowCallout = true
         let smallSquare = CGSize(width: 30, height: 30)
         let button = UIButton(frame: CGRect(origin: .zero,

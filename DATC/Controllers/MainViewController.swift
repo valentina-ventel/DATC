@@ -46,7 +46,7 @@ class MainViewConroller: UIViewController {
     
     @IBAction private func loginButton() {
         let loginManager = LoginManager()
-
+    
         loginManager.logIn(
             permissions: [.publicProfile, .userFriends],
             viewController: self
@@ -75,6 +75,9 @@ class MainViewConroller: UIViewController {
     // Client ID: 483907564434-btsrqjeruduk8434c1f6hvqvvq05ir4q.apps.googleusercontent.com
     override func viewDidLoad() {
         super.viewDidLoad()
+        //TODO: remove this
+//        self.performSegue(withIdentifier: "loginSegue", sender: nil)
+
         
         GIDSignIn.sharedInstance().presentingViewController = self
         //GIDSignIn.sharedInstance()?.restorePreviousSignIn()

@@ -10,43 +10,56 @@ import UIKit
 import Foundation
 
 protocol ReportModelProtocol: class {
-    func itemsDownloaded(items: NSArray)
+    func itemsDownloaded(items: [Report])
 }
 
 class ReportModel: NSObject {
     //properties
     
     weak var delegate: ReportModelProtocol!
-    
-    var data = Data()
-    
     let urlPath: String = "http://127.0.0.1/selectReports.php" //this will be changed to the path where service.php lives
-    
-    
-    
-    
-    func downloadItems() {
+//    let regionReports: Region?
+//
+//    init(reginReports: Region) {
+//        self.regionReports = reginReports
+//    }
+
+    func downloadItems(regionReports: Region) {
+        print("-----------------------------------------------------")
+        print("lat: \(regionReports.minLatitude) and \(regionReports.maxLatitude) and long: \(regionReports.minLongitude) and \(regionReports.maxLongitude)")
+        print("-----------------------------------------------------")
         
         guard let url = URL(string: urlPath) else {
             print("Invalid URL", urlPath)
             return
         }
         var request = URLRequest(url: url)
-            
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
-            if error != nil {
-                print("Failed to download data with error \(String(describing: error))")
+        request.httpMethod = "POST"// Compose a query string
+
+        let postString = "item1=\(regionReports.minLatitude)&item2=\(regionReports.maxLatitude)&item3=\( regionReports.minLongitude)&item4=\( regionReports.maxLongitude)";
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+
+        let task = URLSession.shared.downloadTask(with: request)
+        {(location, response, error) in
+
+            guard let _:NSURL = location as NSURL?, let _:URLResponse = response, error == nil else {
+                print("error")
                 return
-            } else {
-                
-                
-                self.parseJSON(data!)
             }
+
+            let urlContents = try! NSString(contentsOf: location!, encoding: String.Encoding.utf8.rawValue)
+
             
+            print("---------------------------------------")
+            print("\n\nHello! I'm: \(urlContents) super!!!!")
+            
+            let myNSData = urlContents.data(using: String.Encoding.utf8.rawValue)
+            self.parseJSON(myNSData!)
+
         }
-        
+
         task.resume()
+        
     }
 
     
@@ -56,7 +69,9 @@ class ReportModel: NSObject {
         
         do {
             let strData = String(decoding: data, as: UTF8.self)
+            print("***************************************")
             print(strData)
+            print("***************************************")
                 jsonResult = try JSONSerialization.jsonObject(with: data, options:JSONSerialization.ReadingOptions.allowFragments) as! NSArray
             
         } catch let error as NSError {
@@ -65,37 +80,35 @@ class ReportModel: NSObject {
         }
         
         var jsonElement = NSDictionary()
-        let reports = NSMutableArray()
+        var reports = [Report]()
         
         for i in 0 ..< jsonResult.count
         {
             
             jsonElement = jsonResult[i] as! NSDictionary
-            
-            let animal = Report()
+            var descriptionReport: String
+            var latitude: Float
+            var longitude: Float
             
             //the following insures none of the JsonElement values are nil through optional binding
-            if let description = jsonElement["Description"] as? String,
-                let latitude = jsonElement["Latitude"] as? Float,
-                let longitude = jsonElement["Longitude"] as? Float
+            if let description = jsonElement["description"] as? String,
+                let latitudeString = jsonElement["latitude"] as? String,
+                let lat = Float(latitudeString),
+                let longitudeString = jsonElement["longitude"] as? String,
+                let lon = Float(longitudeString)
             {
-                
-                animal.descriptionReport = description
-                print("--------------------------------------------------------------")
-                animal.latitude = latitude
-                print(latitude)
-                animal.longitude = longitude
-                print(longitude)
+                descriptionReport = description
+                latitude = lat
+                longitude = lon
+                reports.append(Report(descriptionReport: descriptionReport, latitude: latitude, longitude: longitude))
             }
-            
-            reports.add(animal)
-            
         }
         
         DispatchQueue.main.async(execute: { () -> Void in
-            
+
             self.delegate.itemsDownloaded(items: reports)
-            
+
         })
+        
     }
 }

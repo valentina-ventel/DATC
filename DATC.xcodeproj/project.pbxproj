@@ -15,6 +15,8 @@
 		A78AB4E0237B04C40073C098 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A78AB4DE237B04C40073C098 /* Main.storyboard */; };
 		A78AB4E2237B04C60073C098 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A78AB4E1237B04C60073C098 /* Assets.xcassets */; };
 		A78AB4E5237B04C60073C098 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A78AB4E3237B04C60073C098 /* LaunchScreen.storyboard */; };
+		A7C6105723BE98DC00DC6CA8 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C6105623BE98DC00DC6CA8 /* Region.swift */; };
+		A7C6105D23BFDC4F00DC6CA8 /* HTTPReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C6105C23BFDC4F00DC6CA8 /* HTTPReport.swift */; };
 		A7FF84D223BA7EF500139F44 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FF84CF23BA7EF500139F44 /* MapViewController.swift */; };
 		A7FF84D323BA7EF500139F44 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FF84D023BA7EF500139F44 /* LocationSearchTable.swift */; };
 		A7FF84D423BA7EF600139F44 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FF84D123BA7EF500139F44 /* MainViewController.swift */; };
@@ -35,6 +37,8 @@
 		A78AB4E1237B04C60073C098 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A78AB4E4237B04C60073C098 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A78AB4E6237B04C60073C098 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7C6105623BE98DC00DC6CA8 /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
+		A7C6105C23BFDC4F00DC6CA8 /* HTTPReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPReport.swift; sourceTree = "<group>"; };
 		A7FF84CF23BA7EF500139F44 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		A7FF84D023BA7EF500139F44 /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		A7FF84D123BA7EF500139F44 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 			children = (
 				A7FF84D923BAABEC00139F44 /* Report.swift */,
 				A7FF84D723BAAAB200139F44 /* ReportModelProtocol.swift */,
+				A7C6105623BE98DC00DC6CA8 /* Region.swift */,
+				A7C6105C23BFDC4F00DC6CA8 /* HTTPReport.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -275,10 +281,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7C6105723BE98DC00DC6CA8 /* Region.swift in Sources */,
 				A73067D42392B037001AF822 /* FirebaseAuthManager.swift in Sources */,
 				A7FF84D323BA7EF500139F44 /* LocationSearchTable.swift in Sources */,
 				A78AB4D9237B04C40073C098 /* AppDelegate.swift in Sources */,
 				A7FF84DA23BAABEC00139F44 /* Report.swift in Sources */,
+				A7C6105D23BFDC4F00DC6CA8 /* HTTPReport.swift in Sources */,
 				A7FF84D423BA7EF600139F44 /* MainViewController.swift in Sources */,
 				A78AB4DB237B04C40073C098 /* SceneDelegate.swift in Sources */,
 				A7FF84D223BA7EF500139F44 /* MapViewController.swift in Sources */,

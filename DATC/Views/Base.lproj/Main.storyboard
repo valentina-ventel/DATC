@@ -17,8 +17,10 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ev2-6R-9wT">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Noi-q1-WER"/>
+                                    <outletCollection property="gestureRecognizers" destination="4eq-8z-yq8" appends="YES" id="5BX-hr-CVe"/>
                                 </connections>
                             </mapView>
                         </subviews>
@@ -39,6 +41,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="4eq-8z-yq8">
+                    <connections>
+                        <action selector="longPressGestureRecognize:" destination="BYZ-38-t0r" id="1Ek-zd-N64"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="840.57971014492762" y="-131.25"/>
         </scene>
@@ -112,15 +119,13 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUm-lS-gKn">
                                 <rect key="frame" x="20" y="708" width="183" height="64"/>
-                                <color key="backgroundColor" red="0.23696098662374704" green="0.41799567261617704" blue="0.68440333549222798" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.27039785082407741" green="0.34081382194388959" blue="0.57978465025906734" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="xDF-z4-t52"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="9"/>
                                 <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <state key="normal" title="Facebook Login" image="ic_facebook.png">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
+                                <state key="normal" title="Facebook Login" image="facebook"/>
                                 <connections>
                                     <action selector="loginButton" destination="p1R-EE-o9y" eventType="touchUpInside" id="R6I-Oc-3u6"/>
                                 </connections>
@@ -129,7 +134,7 @@
                                 <rect key="frame" x="211" y="708" width="183" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="9"/>
-                                <state key="normal" title="Google Login" image="ic_google.png">
+                                <state key="normal" title="Google Login" image="google">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
@@ -214,8 +219,8 @@
     </scenes>
     <resources>
         <image name="capra" width="375" height="225"/>
-        <image name="ic_facebook.png" width="24" height="24"/>
-        <image name="ic_google.png" width="24" height="24"/>
+        <image name="facebook" width="38" height="25"/>
+        <image name="google" width="76" height="40"/>
         <image name="iepure" width="300" height="300"/>
         <image name="lup" width="472" height="314.5"/>
         <image name="urs" width="512" height="329.5"/>
