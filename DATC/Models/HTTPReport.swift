@@ -24,7 +24,7 @@ class HTTPReport: NSObject {
         request.httpMethod = "POST"
         request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
         
-        let postString = "item1=\(report.descriptionReport)&item2=\(report.latitude)&item3=\(report.longitude)"
+        let postString = "item1=\(report.name)&item2=\(report.latitude)&item3=\(report.longitude)"
         print("Add: \(postString)")
         request.httpBody = postString.data(using: String.Encoding.utf8)
 

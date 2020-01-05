@@ -9,12 +9,12 @@
 import UIKit
 
 class Report: NSObject {
-    var descriptionReport: String
+    var name: String
     var latitude: Float
     var longitude: Float
     
     init(descriptionReport: String, latitude: Float, longitude: Float) {
-        self.descriptionReport = descriptionReport
+        self.name = descriptionReport
         self.latitude = latitude
         self.longitude = longitude
     }

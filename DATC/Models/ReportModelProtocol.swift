@@ -24,11 +24,12 @@ class ReportModel: NSObject {
 //        self.regionReports = reginReports
 //    }
 
-    func downloadItems(regionReports: Region) {
-        print("-----------------------------------------------------")
-        print("lat: \(regionReports.minLatitude) and \(regionReports.maxLatitude) and long: \(regionReports.minLongitude) and \(regionReports.maxLongitude)")
-        print("-----------------------------------------------------")
-        
+    func downloadItems(from region: Region) {
+        print("""
+            Downloading animal reports in [(\(region.nw.latitude), \(region.nw.longitude))
+            : (\(region.se.latitude), \(region.se.longitude))]...
+            """)
+
         guard let url = URL(string: urlPath) else {
             print("Invalid URL", urlPath)
             return
@@ -36,7 +37,7 @@ class ReportModel: NSObject {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"// Compose a query string
 
-        let postString = "item1=\(regionReports.minLatitude)&item2=\(regionReports.maxLatitude)&item3=\( regionReports.minLongitude)&item4=\( regionReports.maxLongitude)";
+        let postString = "item1=\(region.se.latitude)&item2=\(region.nw.latitude)&item3=\( region.nw.longitude)&item4=\( region.se.longitude)";
         request.httpBody = postString.data(using: String.Encoding.utf8)
 
         let task = URLSession.shared.downloadTask(with: request)

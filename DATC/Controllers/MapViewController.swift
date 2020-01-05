@@ -15,6 +15,7 @@ protocol HandleMapSearch {
     func dropPinZoomIn(placemark: MKPlacemark)
 }
 
+
 class MapViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
@@ -124,7 +125,7 @@ extension MapViewController: CLLocationManagerDelegate, ReportModelProtocol  {
         
         for report in reports {
             let annotation = MKPointAnnotation()
-            annotation.title = report.descriptionReport
+            annotation.title = report.name
             annotation.coordinate = CLLocationCoordinate2D(latitude: Double(report.latitude) as CLLocationDegrees, longitude:
                 Double(report.longitude) as CLLocationDegrees)
             print("________________________")
@@ -136,7 +137,7 @@ extension MapViewController: CLLocationManagerDelegate, ReportModelProtocol  {
 
     func itemsDownloaded(items: [Report]) {
         for report in items {
-            print(report.descriptionReport)
+            print(report.name)
         }
         createAnnotatin(reports: items)
     }
@@ -155,10 +156,12 @@ extension MapViewController: CLLocationManagerDelegate, ReportModelProtocol  {
         
         print("Long: \(region.span.latitudeDelta) and Lat: \(region.span.longitudeDelta)")
         
-        //MARK: - Calulating the coordinates user of the region and prepare for selecton of animals from database
-        let regionReports = Region(minLatitude: Float(region.center.latitude - region.span.latitudeDelta), maxLatitude: Float(region.center.latitude + region.span.latitudeDelta), minLongitude: Float(region.center.longitude - region.span.longitudeDelta), maxLongitude: Float(region.center.longitude + region.span.longitudeDelta))
+        //MARK: - Calulating the coordinates user of the region
+        // and prepare for selection of animals from database
+        let regionReports = Region(nw: region.nw(),
+                                   se: region.se())
         reportModel.delegate = self
-        reportModel.downloadItems(regionReports: regionReports)
+        reportModel.downloadItems(from: regionReports)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

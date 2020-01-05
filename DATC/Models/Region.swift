@@ -7,17 +7,14 @@
 //
 
 import UIKit
+import MapKit
 
 class Region: NSObject {
-    var minLatitude: Float
-    var maxLatitude: Float
-    var minLongitude: Float
-    var maxLongitude: Float
-    
-    init(minLatitude: Float, maxLatitude: Float, minLongitude: Float, maxLongitude: Float) {
-        self.minLatitude = minLatitude
-        self.maxLatitude = maxLatitude
-        self.minLongitude = minLongitude
-        self.maxLongitude = maxLongitude
+    var nw: CLLocationCoordinate2D
+    var se: CLLocationCoordinate2D
+        
+    init(nw: CLLocationCoordinate2D, se: CLLocationCoordinate2D) {
+        self.nw = nw
+        self.se = se
     }
 }
